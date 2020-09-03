@@ -1,5 +1,6 @@
 # WRITE YOUR FUNCTIONS HERE
 
+
 def get_pet_shop_name(pet_shop):
     return pet_shop["name"]
 
@@ -65,11 +66,26 @@ def get_customer_cash(customers):
     return customers["cash"]
 
 def remove_customer_cash(customer, amount):
-    for each_customer in customer["name"]:
-        if customer["name"] == each_customer:
-            new_amount = get_customer_cash(each_customer) - amount
-            return each_customer["cash"] = new_amount
+    new_amount = (get_customer_cash(customer) - amount)
+    customer["cash"] = new_amount
 
+def get_customer_pet_count(customer):
+    pet_count = []
+    for pet in customer["pets"]:
+        pet_count.append(pet)
+    return len(pet_count)
 
+def add_pet_to_customer(customer, pet):
+    customer["pets"].append(pet)
     
+def customer_can_afford_pet(customer, pets):
+    pets_can_afford = []
+    customer_money = customer["cash"]
+    index_counter = 0
+
+    for pet in pets[index_counter]:
+        if customer_money >= pets[0]["price"]:
+            return True
+        else:
+            return False
 
