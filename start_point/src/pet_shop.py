@@ -8,23 +8,23 @@ def get_total_cash(pet_shop):
     return pet_shop["admin"]["total_cash"]
 
 def add_or_remove_cash(pet_shop, amount):
-    total_cash = get_total_cash(pet_shop)
-    pet_shop["admin"]["total_cash"] = (total_cash + amount)
-    return pet_shop["admin"]["total_cash"]
+    pet_shop["admin"]["total_cash"] = (get_total_cash(pet_shop) + amount)
+
 
 def get_pets_sold(pet_shop):
     return pet_shop["admin"]["pets_sold"]
 
 def increase_pets_sold(pet_shop, amount):
-    sold_pets = get_pets_sold(pet_shop)
-    pet_shop["admin"]["pets_sold"] = sold_pets + amount
-    return pet_shop["admin"]["pets_sold"]
+    pet_shop["admin"]["pets_sold"] = (get_pets_sold(pet_shop) + amount)
+
 
 def get_stock_count(pet_shop):
-    stock = []
-    for pets in pet_shop["pets"]:
-        stock.append(pets)
-    return len(stock)
+    return len(pet_shop["pets"])
+    
+    # stock = []
+    # for pets in pet_shop["pets"]:
+    #     stock.append(pets)
+    # return len(stock)
 
 def get_pets_by_breed(pet_shop, breed):
     desired_pets = []
@@ -66,14 +66,17 @@ def get_customer_cash(customers):
     return customers["cash"]
 
 def remove_customer_cash(customer, amount):
-    new_amount = (get_customer_cash(customer) - amount)
-    customer["cash"] = new_amount
+    customer["cash"] = (get_customer_cash(customer) - amount)
+
 
 def get_customer_pet_count(customer):
-    pet_count = []
-    for pet in customer["pets"]:
-        pet_count.append(pet)
-    return len(pet_count)
+    return len(customer["pets"])
+    
+    
+    # pet_count = []
+    # for pet in customer["pets"]:
+    #     pet_count.append(pet)
+    # return len(pet_count)
 
 def add_pet_to_customer(customer, pet):
     customer["pets"].append(pet)
