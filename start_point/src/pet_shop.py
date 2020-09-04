@@ -40,8 +40,8 @@ def find_pet_by_name(pet_shop, pet_name):
             return pet_shop["pets"][index_counter]
         else:
             index_counter += 1
-        if(index_counter > len(pet_shop["pets"])):
-            return None
+    if(index_counter > len(pet_shop["pets"])):
+        return None
 
 
 def remove_pet_by_name(pet_shop, pet_name):
