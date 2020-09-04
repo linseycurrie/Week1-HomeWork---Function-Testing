@@ -100,6 +100,8 @@ def sell_pet_to_customer(pet_shop, pet, customer):
         remove_customer_cash(customer, int(pet["price"]))
         increase_pets_sold(pet_shop, 1)
         add_or_remove_cash(pet_shop, pet["price"])
-    elif((pet == None and customer_can_afford_pet(customer, pet))):
+    elif(pet == None):
         return "Sorry we do not have that pet."
+    elif((customer_can_afford_pet(customer, pet) == False)):
+        return "Sorry you do not have enough money."
 
