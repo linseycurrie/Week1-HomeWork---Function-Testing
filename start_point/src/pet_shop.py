@@ -1,5 +1,5 @@
 # WRITE YOUR FUNCTIONS HERE
-
+import pdb
 
 def get_pet_shop_name(pet_shop):
     return pet_shop["name"]
@@ -41,6 +41,7 @@ def find_pet_by_name(pet_shop, pet_name):
         else:
             index_count += 1
 
+
 def remove_pet_by_name(pet_shop, pet_name):
     index_count = 0
     for pet in pet_shop["pets"]:
@@ -48,6 +49,8 @@ def remove_pet_by_name(pet_shop, pet_name):
             del pet_shop["pets"][index_count]
         else:
             index_count += 1
+    if(index_counter > len(pet_shop["pets"])):
+        return None
 
 def add_pet_to_stock(pet_shop, new_pet):
     name = input("What is your pets name ? ")
@@ -78,17 +81,24 @@ def get_customer_pet_count(customer):
     #     pet_count.append(pet)
     # return len(pet_count)
 
+
 def add_pet_to_customer(customer, pet):
     customer["pets"].append(pet)
     
-def customer_can_afford_pet(customer, pets):
-    pets_can_afford = []
-    customer_money = customer["cash"]
-    index_counter = 0
-
-    for pet in pets[index_counter]:
-        if customer_money >= pets[0]["price"]:
+def customer_can_afford_pet(customer, pet_list):
+        if (get_customer_cash(customer) >= pet_list["price"]):
             return True
         else:
             return False
 
+def sell_pet_to_customer(pet_shop, pet_name, customer):
+    customer_has_enough_money = customer_can_afford_pet(customer, pet_to_sell)
+
+    if((pet_to_sell = find_pet_by_name(pet_shop, pet_name))== None):
+        print("Sorry that pet is not available")
+    elif(pet_to_sell != None and customer_has_enough_money == True):
+        remove_pet_by_name(pet_shop, pet_to_sell)
+        add_pet_to_customer(customer, pet_to_sell)
+        remove_customer_cash(customer, int(pet_to_sell["price"]))
+        increase_pets_sold(pet_shop, 1)
+        add_or_remove_cash(pet_shop, pet_to_sell["price"])
