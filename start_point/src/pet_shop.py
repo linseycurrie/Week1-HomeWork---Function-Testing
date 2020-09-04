@@ -34,21 +34,23 @@ def get_pets_by_breed(pet_shop, breed):
     return desired_pets
 
 def find_pet_by_name(pet_shop, pet_name):
-    index_count = 0
+    index_counter = 0
     for pet in pet_shop["pets"]:
         if pet["name"] == pet_name:
-            return pet_shop["pets"][index_count]
+            return pet_shop["pets"][index_counter]
         else:
-            index_count += 1
+            index_counter += 1
+        if(index_counter > len(pet_shop["pets"])):
+            return None
 
 
 def remove_pet_by_name(pet_shop, pet_name):
-    index_count = 0
+    index_counter = 0
     for pet in pet_shop["pets"]:
         if pet["name"] == pet_name:
-            del pet_shop["pets"][index_count]
+            del pet_shop["pets"][index_counter]
         else:
-            index_count += 1
+            index_counter += 1
     if(index_counter > len(pet_shop["pets"])):
         return None
 
@@ -91,14 +93,13 @@ def customer_can_afford_pet(customer, pet_list):
         else:
             return False
 
-def sell_pet_to_customer(pet_shop, pet_name, customer):
-    customer_has_enough_money = customer_can_afford_pet(customer, pet_to_sell)
-
-    if((pet_to_sell = find_pet_by_name(pet_shop, pet_name))== None):
-        print("Sorry that pet is not available")
-    elif(pet_to_sell != None and customer_has_enough_money == True):
-        remove_pet_by_name(pet_shop, pet_to_sell)
-        add_pet_to_customer(customer, pet_to_sell)
-        remove_customer_cash(customer, int(pet_to_sell["price"]))
+def sell_pet_to_customer(pet_shop, pet, customer):
+    if((customer_can_afford_pet(customer, pet) and pet)):
+        remove_pet_by_name(pet_shop, pet)
+        add_pet_to_customer(customer, pet)
+        remove_customer_cash(customer, int(pet["price"]))
         increase_pets_sold(pet_shop, 1)
-        add_or_remove_cash(pet_shop, pet_to_sell["price"])
+        add_or_remove_cash(pet_shop, pet["price"])
+    elif((pet == None and customer_can_afford_pet(customer, pet))):
+        return "Sorry we do not have that pet."
+
