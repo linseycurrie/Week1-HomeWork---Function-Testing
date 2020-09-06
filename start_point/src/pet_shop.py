@@ -88,7 +88,10 @@ def add_pet_to_customer(customer, pet):
     customer["pets"].append(pet)
     
 def customer_can_afford_pet(customer, pet_list):
-        if (get_customer_cash(customer) >= pet_list["price"]):
+        if (pet_list == None):
+            print("Sorry no pet list available")
+            # break
+        elif (get_customer_cash(customer) >= pet_list["price"]):
             return True
         else:
             return False
