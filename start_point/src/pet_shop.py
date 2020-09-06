@@ -21,6 +21,7 @@ def increase_pets_sold(pet_shop, amount):
 def get_stock_count(pet_shop):
     return len(pet_shop["pets"])
     
+    # Alternative method for stock count.
     # stock = []
     # for pets in pet_shop["pets"]:
     #     stock.append(pets)
@@ -40,8 +41,6 @@ def find_pet_by_name(pet_shop, pet_name):
             return pet_shop["pets"][index_counter]
         else:
             index_counter += 1
-    if(index_counter > len(pet_shop["pets"])):
-        return None
 
 
 def remove_pet_by_name(pet_shop, pet_name):
@@ -51,19 +50,14 @@ def remove_pet_by_name(pet_shop, pet_name):
             del pet_shop["pets"][index_counter]
         else:
             index_counter += 1
-    if(index_counter > len(pet_shop["pets"])):
-        return None
+
 
 def add_pet_to_stock(pet_shop, new_pet):
-    name = input("What is your pets name ? ")
-    pet_type = input("What type of pet do you want to add ? ")
-    breed = input("what breed is your pet ? ")
-    price = input("How much does this pet cost ? ")
     new_pet = {
-        "name": name, 
-        "pet_type": pet_type, 
-        "breed": breed, 
-        "price": price
+        "name": input("\nWhat is your pets name ? "), 
+        "pet_type": input("\nWhat type of pet do you want to add ? "), 
+        "breed": input("\nwhat breed is your pet ? "), 
+        "price": input("\nHow much does this pet cost ? ")
         }
     pet_shop["pets"].append(new_pet)
 
@@ -77,7 +71,7 @@ def remove_customer_cash(customer, amount):
 def get_customer_pet_count(customer):
     return len(customer["pets"])
     
-    
+    # Different way to calculate the customer pet count. 
     # pet_count = []
     # for pet in customer["pets"]:
     #     pet_count.append(pet)
@@ -89,7 +83,7 @@ def add_pet_to_customer(customer, pet):
     
 def customer_can_afford_pet(customer, pet_list):
         if (pet_list == None):
-            print("Sorry no pet list available")
+            print("\nSorry no pet list available")
             # break
         elif (get_customer_cash(customer) >= pet_list["price"]):
             return True
@@ -104,7 +98,7 @@ def sell_pet_to_customer(pet_shop, pet, customer):
         increase_pets_sold(pet_shop, 1)
         add_or_remove_cash(pet_shop, pet["price"])
     elif(pet == None):
-        return "Sorry we do not have that pet."
+        return "\n Sorry we do not have that pet."
     elif((customer_can_afford_pet(customer, pet) == False)):
-        return "Sorry you do not have enough money."
+        return "\n Sorry you do not have enough money."
 
